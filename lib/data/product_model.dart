@@ -3,18 +3,18 @@ class ProductModel {
   final String title;
   final double price;
   final String description;
-  final String category;
+  // final String category;
   final String image;
-  final Rating rating;
+  // final Rating rating;
 
   ProductModel({
     required this.id,
     required this.title,
     required this.price,
     required this.description,
-    required this.category,
+    // required this.category,
     required this.image,
-    required this.rating,
+    // required this.rating,
   });
 
   // Factory constructor to create a ProductModel from JSON
@@ -24,9 +24,9 @@ class ProductModel {
       title: json['title'],
       price: json['price'].toDouble(),
       description: json['description'],
-      category: json['category'],
+      // category: json['category'],
       image: json['image'],
-      rating: Rating.fromJson(json['rating']),
+      // rating: Rating.fromJson(json['rating']),
     );
   }
 }
