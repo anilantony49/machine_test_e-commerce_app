@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:machine_test/core/utils/constants.dart';
 import 'package:machine_test/core/utils/text.dart';
@@ -7,6 +6,7 @@ import 'package:machine_test/db/cart_db.dart';
 import 'package:machine_test/presentation/cart/check_out_screen/widgets/build_summary_row.dart';
 import 'package:machine_test/presentation/cart/check_out_screen/widgets/build_table_body.dart';
 import 'package:machine_test/presentation/cart/check_out_screen/widgets/build_table_header.dart';
+import 'package:machine_test/presentation/cart/invoice_receipt/invoice_receipt_view.dart';
 import 'package:machine_test/widgets/round_button.dart';
 
 class CheckOutScreen extends StatefulWidget {
@@ -47,10 +47,10 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
 
   double _calculateSubtotal() {
     return items.fold(0.0, (sum, item) {
-      double price = item.price ;
+      double price = item.price;
       int quantity = item.quantity!;
       // double discount = double.tryParse(item.discount) ?? 0.0;
-      return sum + (price * quantity );
+      return sum + (price * quantity);
     });
   }
 
@@ -91,12 +91,12 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
               RoundButton(
                 title: AppText.buyNow,
                 onPressed: () {
-                  // nextScreen(
-                  //     context,
-                  //     InvoiceReceiptView(
-                  //       grandTotal: grandTotal,
-                  //       product: widget.product,
-                  //     ));
+                  nextScreen(
+                      context,
+                      InvoiceReceiptView(
+                        grandTotal: grandTotal,
+                        product: widget.product,
+                      ));
                 },
               ),
               const SizedBox(height: 15),
