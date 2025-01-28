@@ -37,9 +37,9 @@ class CartScreen extends StatelessWidget {
                       basePrice: item.price,
                       image: item.image,
                       onRemove: () => CartActions.removeItemsAndShowSnackbar(
-                          context, item.id.toString()),
+                          context, item.id),
                       // unit: item.id.toString(),
-                      id: item.id.toString(),
+                      id: item.id,
                       // discount: item.discount,
                     );
                   },

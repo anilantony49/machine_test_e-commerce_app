@@ -3,10 +3,11 @@ import 'package:flutter/material.dart';
 import 'package:machine_test/core/utils/colors.dart';
 import 'package:machine_test/core/utils/constants.dart';
 import 'package:machine_test/core/utils/text.dart';
+import 'package:machine_test/db/cart_db.dart';
 
 class CartActions {
-  static void removeItemsAndShowSnackbar(BuildContext context, String itemId) {
-    // CartDb.singleton.removeCart(itemId);
+  static void removeItemsAndShowSnackbar(BuildContext context, int itemId) {
+    CartDb.singleton.removeCart(itemId);
     ScaffoldMessenger.of(context).showSnackBar(
       SnackBar(
         content: Text(AppText.itemRemovedText),

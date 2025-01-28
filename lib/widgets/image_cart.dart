@@ -6,7 +6,7 @@ import 'package:machine_test/data/product_model.dart';
 import 'package:machine_test/db/cart_db.dart';
 
 class ImageCart extends StatefulWidget {
-  final String id;
+  final int id;
   final String title;
   final double basePrice;
   final int initialQuantity;
@@ -50,7 +50,7 @@ class _ImageCartState extends State<ImageCart> {
     });
     final updatedItem = ProductModel(
       // description: '',
-      id: int.parse(widget.id),
+      id: widget.id,
       title: widget.title,
       price: double.parse(widget.basePrice.toStringAsFixed(2)),
       quantity: quantity,
@@ -70,7 +70,7 @@ class _ImageCartState extends State<ImageCart> {
       }
     });
     final updatedItem = ProductModel(
-      id: int.parse(widget.id),
+      id: widget.id,
       title: widget.title,
       price: double.parse(widget.basePrice.toStringAsFixed(2)),
       quantity: quantity,

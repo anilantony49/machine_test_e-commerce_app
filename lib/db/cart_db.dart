@@ -8,7 +8,7 @@ abstract class CartDbFunctions {
   Future<List<ProductModel>> getCart();
   Future<void> addCart(ProductModel models);
   Future<void> removeCart(int cartId);
-  Future<void> editCart(ProductModel value, String cartId);
+  Future<void> editCart(ProductModel value, int cartId);
 }
 
 class CartDb implements CartDbFunctions {
@@ -36,7 +36,7 @@ class CartDb implements CartDbFunctions {
   }
 
   @override
-  Future<void> editCart(ProductModel value, String cartId) async {
+  Future<void> editCart(ProductModel value, int cartId) async {
     final db = await Hive.openBox<ProductModel>(_dbName);
     await db.put(cartId, value);
     refresh();
