@@ -171,15 +171,15 @@ class _ImageCartState extends State<ImageCart> {
                     Row(
                       children: [
                         Text(
-                          "$quantity",
+                          "$quantity Qty",
                           style: TextStyle(
                             color: Appcolor.primaryText,
-                            fontSize: 16,
+                            fontSize: 14,
                             fontWeight: FontWeight.w600,
                           ),
                         ),
                         // Text(
-                        //   widget.unit,
+                        //   widget.initialQuantity,
                         //   style: TextStyle(
                         //     color: Appcolor.primaryText,
                         //     fontSize: 16,
@@ -218,14 +218,14 @@ class _ImageCartState extends State<ImageCart> {
                           )),
                     ),
                     const Spacer(),
-                    // Text(
-                    //   "\$${totalPrice.toStringAsFixed(2)}",
-                    //   style: TextStyle(
-                    //     color: Appcolor.primaryText,
-                    //     fontSize: 18,
-                    //     fontWeight: FontWeight.w600,
-                    //   ),
-                    // ),
+                    Text(
+                      "\$${totalPrice.toStringAsFixed(2)}",
+                      style: TextStyle(
+                        color: Appcolor.primaryText,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w600,
+                      ),
+                    ),
                   ],
                 ),
               ],

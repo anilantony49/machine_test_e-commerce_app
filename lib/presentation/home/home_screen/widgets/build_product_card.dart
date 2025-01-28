@@ -103,10 +103,8 @@ class BuildProductCard extends StatelessWidget {
                             if (isItemInCart) {
                               // Remove item from cart
                               final cartItem = cartItems.firstWhere(
-                                  (cartItem) =>
-                                      cartItem.id == product.id);
-                              await CartDb.singleton
-                                  .removeCart(cartItem.id);
+                                  (cartItem) => cartItem.id == product.id);
+                              await CartDb.singleton.removeCart(cartItem.id);
 
                               // ignore: use_build_context_synchronously
                               ScaffoldMessenger.of(context).showSnackBar(

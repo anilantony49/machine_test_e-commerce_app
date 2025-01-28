@@ -3,6 +3,7 @@ import 'package:machine_test/core/utils/alerts_and_navigators.dart';
 import 'package:machine_test/core/utils/text.dart';
 import 'package:machine_test/data/product_model.dart';
 import 'package:machine_test/db/cart_db.dart';
+import 'package:machine_test/presentation/cart/widgets/build_check_out.dart';
 import 'package:machine_test/widgets/custom_appbar1.dart';
 import 'package:machine_test/widgets/image_cart.dart';
 
@@ -17,10 +18,8 @@ class CartScreen extends StatelessWidget {
         valueListenable: CartDb().cartNotifier,
         builder: (BuildContext context, List<ProductModel> newItem, Widget? _) {
           // calculate total amount
-          // final double totalAmount = newItem.fold(
-          //     0.0,
-          //     (sum, item) =>
-          //         sum + (double.parse(item.price) * int.parse(item.quantity)));
+          final double totalAmount = newItem.fold(
+              0.0, (sum, item) => sum + ((item.price * item.quantity!)));
           return Stack(
             alignment: Alignment.bottomCenter,
             children: [
@@ -50,7 +49,7 @@ class CartScreen extends StatelessWidget {
                   itemCount: newItem.length,
                 ),
               ),
-              // buildCheckOut(context, totalAmount)
+              buildCheckOut(context, totalAmount)
             ],
           );
         },
