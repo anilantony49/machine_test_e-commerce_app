@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:machine_test/core/utils/colors.dart';
 import 'package:machine_test/core/utils/constants.dart';
+import 'package:machine_test/presentation/cart/check_out_screen/check_out_screen.dart';
 
 // build_check_out.dart
 Widget buildCheckOut(BuildContext context, double totalAmount) {
@@ -17,8 +18,8 @@ Widget buildCheckOut(BuildContext context, double totalAmount) {
         ),
         MaterialButton(
           onPressed: () {
-            // nextScreen(
-            //     context, CheckOutScreen(totalAmount: totalAmount));
+            nextScreen(
+                context, CheckOutScreen(totalAmount: totalAmount));
           },
           minWidth: 100,
           elevation: 0.1,

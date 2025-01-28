@@ -3,7 +3,7 @@ import 'package:machine_test/core/utils/alerts_and_navigators.dart';
 import 'package:machine_test/core/utils/text.dart';
 import 'package:machine_test/data/product_model.dart';
 import 'package:machine_test/db/cart_db.dart';
-import 'package:machine_test/presentation/cart/widgets/build_check_out.dart';
+import 'package:machine_test/presentation/cart/cart_screen/widgets/build_check_out.dart';
 import 'package:machine_test/widgets/custom_appbar1.dart';
 import 'package:machine_test/widgets/image_cart.dart';
 
