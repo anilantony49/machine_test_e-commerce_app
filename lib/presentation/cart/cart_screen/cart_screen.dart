@@ -34,7 +34,7 @@ class CartScreen extends StatelessWidget {
                     // Get item data
                     final item = newItem[index];
                     return ImageCart(
-                      initialQuantity: item.quantity??1,
+                      initialQuantity: item.quantity ?? 1,
                       title: item.title,
                       basePrice: item.price,
                       image: item.image,

@@ -48,8 +48,7 @@ class _CheckOutScreenState extends State<CheckOutScreen> {
   double _calculateSubtotal() {
     return items.fold(0.0, (sum, item) {
       double price = item.price;
-      int quantity = item.quantity??1;
-      // double discount = double.tryParse(item.discount) ?? 0.0;
+      int quantity = item.quantity ?? 1;
       return sum + (price * quantity);
     });
   }

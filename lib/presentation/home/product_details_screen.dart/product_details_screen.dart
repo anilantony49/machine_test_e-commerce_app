@@ -128,13 +128,6 @@ class ProductDetailsScreen extends StatelessWidget {
                       color: Appcolor.secondaryText,
                     ),
                   ),
-                  //  Text(
-                  //   "Quanty: ${product.quantity}",
-                  //   style: TextStyle(
-                  //     fontSize: 18,
-                  //     color: Appcolor.secondaryText,
-                  //   ),
-                  // ),
                 ],
               ),
               const SizedBox(height: 10),
@@ -183,8 +176,6 @@ class ProductDetailsScreen extends StatelessWidget {
                               price: product.price,
                               quantity: product.quantity,
                               image: product.image,
-                              // unit: product["unit"],
-                              // discount: product["discount"]
                             );
 
                             await CartDb.singleton.addCart(newItem);

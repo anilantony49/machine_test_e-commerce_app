@@ -1,5 +1,6 @@
 import 'package:hive_flutter/hive_flutter.dart';
 part 'product_model.g.dart';
+// part 'rating.g.dart'; 
 
 @HiveType(typeId: 1)
 class ProductModel {
@@ -29,7 +30,7 @@ class ProductModel {
       this.description,
       required this.image,
       this.rating,
-      this.quantity=1,
+      this.quantity = 1,
       this.category});
 
   // Factory constructor to create a ProductModel from JSON
@@ -46,8 +47,11 @@ class ProductModel {
   }
 }
 
+@HiveType(typeId: 2)
 class Rating {
+  @HiveField(0)
   final double rate;
+  @HiveField(1)
   final int count;
 
   Rating({

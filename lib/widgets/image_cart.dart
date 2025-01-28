@@ -1,4 +1,3 @@
-import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:machine_test/core/utils/colors.dart';
@@ -178,22 +177,7 @@ class _ImageCartState extends State<ImageCart> {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        // Text(
-                        //   widget.initialQuantity,
-                        //   style: TextStyle(
-                        //     color: Appcolor.primaryText,
-                        //     fontSize: 16,
-                        //     fontWeight: FontWeight.w600,
-                        //   ),
-                        // ),
-                        // Text(
-                        //   widget.unit,
-                        //   style: TextStyle(
-                        //     color: Appcolor.primaryText,
-                        //     fontSize: 16,
-                        //     fontWeight: FontWeight.w600,
-                        //   ),
-                        // ),
+                       
                       ],
                     ),
                     const SizedBox(width: 15),

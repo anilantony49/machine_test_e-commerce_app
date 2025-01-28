@@ -1,21 +1,19 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:machine_test/core/utils/constants.dart';
-import 'package:machine_test/core/utils/text.dart';
 import 'package:machine_test/data/product_model.dart';
 import 'package:machine_test/domine/repository/repository.dart';
+import 'package:machine_test/presentation/bloc/product_bloc/product_bloc.dart';
 import 'package:machine_test/presentation/home/home_screen/widgets/build_banner.dart';
 import 'package:machine_test/presentation/home/home_screen/widgets/build_header.dart';
 import 'package:machine_test/presentation/home/home_screen/widgets/build_product_card.dart';
 import 'package:machine_test/presentation/home/home_screen/widgets/build_search_bar.dart';
-import 'package:machine_test/presentation/home/home_screen/widgets/build_title.dart';
-import 'package:machine_test/widgets/product_list.dart';
+
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 import '../../../core/utils/colors.dart';
-
-// List<CartModels> items = [];
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -42,6 +40,8 @@ class _HomeScreenState extends State<HomeScreen> {
         );
       }
     });
+
+    context.read<ProductBloc>().add(FetchProductsEvent());
   }
 
   @override
@@ -51,13 +51,13 @@ class _HomeScreenState extends State<HomeScreen> {
   }
 
   // Fetch product data from the API
-  Future<List<ProductModel>> fetchProducts() async {
-    try {
-      return await ProductRepository.fetchProducts();
-    } catch (e) {
-      throw Exception('Failed to fetch products: $e');
-    }
-  }
+  // Future<List<ProductModel>> fetchProducts() async {
+  //   try {
+  //     return await ProductRepository.fetchProducts();
+  //   } catch (e) {
+  //     throw Exception('Failed to fetch products: $e');
+  //   }
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -92,21 +92,37 @@ class _HomeScreenState extends State<HomeScreen> {
               ),
               // buildTitle(),
               kHeight(20),
-              FutureBuilder(
-                future: fetchProducts(),
-                builder: (context, snapshot) {
-                  if (snapshot.connectionState == ConnectionState.waiting) {
+
+              BlocBuilder<ProductBloc, ProductState>(
+                builder: (context, state) {
+                  if (state is ProductLoadingState) {
                     return const Center(child: CircularProgressIndicator());
-                  } else if (snapshot.hasError) {
-                    return Center(child: Text('Error: ${snapshot.error}'));
-                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
-                    return const Center(child: Text('No products available'));
-                  } else {
-                    // Pass the product data to BuildProductCard
-                    return BuildProductCard(products: snapshot.data!);
+                  } else if (state is ProductErrorState) {
+                    return Center(child: Text('Error: something went wrong'));
+                  } else if (state is ProductSucessState) {
+                    if (state.products.isEmpty) {
+                      return const Center(child: Text('No products available'));
+                    }
+                    return BuildProductCard(products: state.products);
                   }
+                  return const SizedBox.shrink();
                 },
               ),
+              // FutureBuilder(
+              //   future: fetchProducts(),
+              //   builder: (context, snapshot) {
+              //     if (snapshot.connectionState == ConnectionState.waiting) {
+              //       return const Center(child: CircularProgressIndicator());
+              //     } else if (snapshot.hasError) {
+              //       return Center(child: Text('Error: ${snapshot.error}'));
+              //     } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+              //       return const Center(child: Text('No products available'));
+              //     } else {
+              //       // Pass the product data to BuildProductCard
+              //       return BuildProductCard(products: snapshot.data!);
+              //     }
+              //   },
+              // ),
               //  kHeight(90)
               // buildTitle(),
               // BuildProductCard(

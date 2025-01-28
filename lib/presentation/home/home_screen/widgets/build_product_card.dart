@@ -1,11 +1,11 @@
-import 'dart:math';
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:machine_test/core/utils/colors.dart';
 import 'package:machine_test/core/utils/constants.dart';
 import 'package:machine_test/core/utils/text.dart';
 import 'package:machine_test/data/product_model.dart';
 import 'package:machine_test/db/cart_db.dart';
+import 'package:machine_test/presentation/bloc/product_bloc/product_bloc.dart';
 import 'package:machine_test/presentation/home/product_details_screen.dart/product_details_screen.dart';
 
 class BuildProductCard extends StatelessWidget {
@@ -94,6 +94,51 @@ class BuildProductCard extends StatelessWidget {
                           fontSize: 16,
                           fontWeight: FontWeight.w600),
                     ),
+
+                    // BlocBuilder<ProductBloc, ProductState>(
+                    //     builder: (context, state) {
+                    //   bool isItemInCart = state.cart
+                    //       .any((cartItem) => cartItem.id == product.id);
+
+                    //   return InkWell(
+                    //     onTap: () {
+                    //       if (isItemInCart) {
+                    //         context
+                    //             .read<ProductBloc>()
+                    //             .add(RemoveProductFromCartEvent(product.id));
+
+                    //         ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    //           content: Text(AppText.itemRemovedText),
+                    //           duration: const Duration(seconds: 2),
+                    //         ));
+                    //       } else {
+                    //         context
+                    //             .read<ProductBloc>()
+                    //             .add(AddProductToCartEvent(product));
+                    //         ScaffoldMessenger.of(context).showSnackBar(
+                    //           SnackBar(
+                    //             content: Text(AppText.itemAddedText),
+                    //             duration: const Duration(seconds: 2),
+                    //           ),
+                    //         );
+                    //       }
+                    //     },
+                    //     child: Container(
+                    //       width: 34,
+                    //       height: 34,
+                    //       decoration: BoxDecoration(
+                    //         color: Appcolor.primary,
+                    //         borderRadius: BorderRadius.circular(15),
+                    //       ),
+                    //       alignment: Alignment.center,
+                    //       child: Icon(
+                    //         isItemInCart ? Icons.check : Icons.add,
+                    //         color: Colors.white,
+                    //         size: 20,
+                    //       ),
+                    //     ),
+                    //   );
+                    // })
                     ValueListenableBuilder(
                       valueListenable: CartDb.singleton.cartNotifier,
                       builder: (BuildContext context,
