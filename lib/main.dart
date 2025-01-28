@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:hive_flutter/hive_flutter.dart';
+import 'package:machine_test/data/product_model.dart';
 import 'package:machine_test/others/main_screen.dart';
 
-void main() {
+Future<void> main() async {
+  await Hive.initFlutter();
+  Hive.registerAdapter(ProductModelAdapter());
   runApp(const MyApp());
 }
 

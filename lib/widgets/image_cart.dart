@@ -1,15 +1,17 @@
+import 'dart:math';
+
 import 'package:flutter/material.dart';
 import 'package:machine_test/core/utils/colors.dart';
-import 'package:machine_test/data/cart_models.dart';
 import 'package:machine_test/data/product_model.dart';
+import 'package:machine_test/db/cart_db.dart';
 
 class ImageCart extends StatefulWidget {
   final String id;
   final String title;
   final double basePrice;
   final int initialQuantity;
-  final String discount;
-  final String unit;
+  // final String discount;
+  // final String unit;
   final String image;
   final VoidCallback onRemove;
 
@@ -19,8 +21,8 @@ class ImageCart extends StatefulWidget {
     required this.title,
     required this.basePrice,
     required this.initialQuantity,
-    required this.discount,
-    required this.unit,
+    // required this.discount,
+    // required this.unit,
     required this.image,
     required this.onRemove,
   });
@@ -46,17 +48,18 @@ class _ImageCartState extends State<ImageCart> {
       quantity++;
       totalPrice = widget.basePrice * quantity; // Update total price
     });
-    final updatedItem = CartModels(
-        // description: '',
-        id:'0',
-        title: widget.title,
-        price: '10',
-        quantity: quantity.toString(),
-        unit: widget.unit,
-        image: widget.image,
-        discount: widget.discount);
+    final updatedItem = ProductModel(
+      // description: '',
+      id: int.parse(widget.id),
+      title: widget.title,
+      price: double.parse(widget.basePrice.toStringAsFixed(2)),
+      quantity: quantity,
+      // unit: widget.unit,
+      image: widget.image,
+      // discount: widget.discount
+    );
 
-    // await CartDb.singleton.editCart(updatedItem, widget.id);
+    await CartDb.singleton.editCart(updatedItem, widget.id);
   }
 
   void decrementQuantity() async {
@@ -66,16 +69,17 @@ class _ImageCartState extends State<ImageCart> {
         totalPrice = widget.basePrice * quantity; // Update total price
       }
     });
-    final updatedItem = CartModels(
-        id: widget.id,
-        title: widget.title,
-        price: widget.basePrice.toStringAsFixed(2),
-        quantity: quantity.toString(),
-        unit: widget.unit,
-        image: widget.image,
-        discount: widget.discount);
+    final updatedItem = ProductModel(
+      id: int.parse(widget.id),
+      title: widget.title,
+      price: double.parse(widget.basePrice.toStringAsFixed(2)),
+      quantity: quantity,
+      // unit: widget.unit,
+      image: widget.image,
+      // discount: widget.discount
+    );
 
-    // await CartDb.singleton.editCart(updatedItem, widget.id);
+    await CartDb.singleton.editCart(updatedItem, widget.id);
   }
 
   @override
@@ -105,7 +109,7 @@ class _ImageCartState extends State<ImageCart> {
                   Colors.black.withOpacity(0.35),
                   BlendMode.multiply,
                 ),
-                image: AssetImage(widget.image),
+                image: NetworkImage(widget.image),
                 fit: BoxFit.cover,
               ),
             ),
@@ -174,14 +178,22 @@ class _ImageCartState extends State<ImageCart> {
                             fontWeight: FontWeight.w600,
                           ),
                         ),
-                        Text(
-                          widget.unit,
-                          style: TextStyle(
-                            color: Appcolor.primaryText,
-                            fontSize: 16,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
+                        // Text(
+                        //   widget.unit,
+                        //   style: TextStyle(
+                        //     color: Appcolor.primaryText,
+                        //     fontSize: 16,
+                        //     fontWeight: FontWeight.w600,
+                        //   ),
+                        // ),
+                        // Text(
+                        //   widget.unit,
+                        //   style: TextStyle(
+                        //     color: Appcolor.primaryText,
+                        //     fontSize: 16,
+                        //     fontWeight: FontWeight.w600,
+                        //   ),
+                        // ),
                       ],
                     ),
                     const SizedBox(width: 15),
@@ -206,14 +218,14 @@ class _ImageCartState extends State<ImageCart> {
                           )),
                     ),
                     const Spacer(),
-                    Text(
-                      "\$${totalPrice.toStringAsFixed(2)}",
-                      style: TextStyle(
-                        color: Appcolor.primaryText,
-                        fontSize: 18,
-                        fontWeight: FontWeight.w600,
-                      ),
-                    ),
+                    // Text(
+                    //   "\$${totalPrice.toStringAsFixed(2)}",
+                    //   style: TextStyle(
+                    //     color: Appcolor.primaryText,
+                    //     fontSize: 18,
+                    //     fontWeight: FontWeight.w600,
+                    //   ),
+                    // ),
                   ],
                 ),
               ],
