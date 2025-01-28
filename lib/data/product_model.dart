@@ -11,23 +11,26 @@ class ProductModel {
   final double price;
   @HiveField(3)
   final String? description;
-  // final String category;
+
   @HiveField(4)
   final String image;
-  // final Rating rating;
+
   @HiveField(5)
   final int? quantity;
+  @HiveField(6)
+  final String? category;
+  @HiveField(7)
+  final Rating? rating;
 
-  ProductModel({
-    required this.id,
-    required this.title,
-    required this.price,
-    this.description,
-    // required this.category,
-    required this.image,
-    // required this.rating,
-    this.quantity,
-  });
+  ProductModel(
+      {required this.id,
+      required this.title,
+      required this.price,
+      this.description,
+      required this.image,
+      this.rating,
+      this.quantity,
+      this.category});
 
   // Factory constructor to create a ProductModel from JSON
   factory ProductModel.fromJson(Map<String, dynamic> json) {
@@ -36,27 +39,27 @@ class ProductModel {
       title: json['title'],
       price: json['price'].toDouble(),
       description: json['description'],
-      // category: json['category'],
+      category: json['category'],
       image: json['image'],
-      // rating: Rating.fromJson(json['rating']),
+      rating: Rating.fromJson(json['rating']),
     );
   }
 }
 
-// class Rating {
-//   final double rate;
-//   final int count;
+class Rating {
+  final double rate;
+  final int count;
 
-//   Rating({
-//     required this.rate,
-//     required this.count,
-//   });
+  Rating({
+    required this.rate,
+    required this.count,
+  });
 
-//   // Factory constructor to create a Rating from JSON
-//   factory Rating.fromJson(Map<String, dynamic> json) {
-//     return Rating(
-//       rate: json['rate'].toDouble(),
-//       count: json['count'],
-//     );
-//   }
-// }
+  // Factory constructor to create a Rating from JSON
+  factory Rating.fromJson(Map<String, dynamic> json) {
+    return Rating(
+      rate: json['rate'].toDouble(),
+      count: json['count'],
+    );
+  }
+}

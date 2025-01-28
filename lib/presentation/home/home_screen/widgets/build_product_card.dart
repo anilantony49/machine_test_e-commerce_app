@@ -2,9 +2,11 @@ import 'dart:math';
 
 import 'package:flutter/material.dart';
 import 'package:machine_test/core/utils/colors.dart';
+import 'package:machine_test/core/utils/constants.dart';
 import 'package:machine_test/core/utils/text.dart';
 import 'package:machine_test/data/product_model.dart';
 import 'package:machine_test/db/cart_db.dart';
+import 'package:machine_test/presentation/home/product_details_screen.dart/product_details_screen.dart';
 
 class BuildProductCard extends StatelessWidget {
   final List<ProductModel> products; // Updated to use ProductModel
@@ -27,9 +29,9 @@ class BuildProductCard extends StatelessWidget {
       itemBuilder: (context, index) {
         var product = products[index];
         return InkWell(
-          // onTap: () {
-          //   nextScreen(context, ProductDetailsScreen(product: product));
-          // },
+          onTap: () {
+            nextScreen(context, ProductDetailsScreen(product: product));
+          },
           child: Container(
             // height: 550,
             width: 180,

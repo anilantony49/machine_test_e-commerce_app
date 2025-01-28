@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:machine_test/data/product_model.dart';
 import 'package:machine_test/db/cart_db.dart';
