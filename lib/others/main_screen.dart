@@ -1,6 +1,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:machine_test/others/bottom_navigation.dart';
+import 'package:machine_test/presentation/home/home_screen/home_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -10,10 +11,11 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  List<Widget> pages = [];
-  @override
+ List<Widget> pages = [];
+  @override  @override
   void initState() {
-    pages = [];
+    pages = [const HomeScreen(), const HomeScreen()];
+
 
     super.initState();
   }
