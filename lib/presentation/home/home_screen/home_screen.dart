@@ -2,6 +2,8 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:machine_test/core/utils/text.dart';
+import 'package:machine_test/data/product_model.dart';
+import 'package:machine_test/domine/repository/repository.dart';
 import 'package:machine_test/presentation/home/home_screen/widgets/build_banner.dart';
 import 'package:machine_test/presentation/home/home_screen/widgets/build_header.dart';
 import 'package:machine_test/presentation/home/home_screen/widgets/build_product_card.dart';
@@ -47,6 +49,15 @@ class _HomeScreenState extends State<HomeScreen> {
     super.dispose();
   }
 
+  // Fetch product data from the API
+  Future<List<ProductModel>> fetchProducts() async {
+    try {
+      return await ProductRepository.fetchProducts();
+    } catch (e) {
+      throw Exception('Failed to fetch products: $e');
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     TextEditingController txtSearch = TextEditingController();
@@ -78,27 +89,40 @@ class _HomeScreenState extends State<HomeScreen> {
                   expansionFactor: 2,
                 ),
               ),
-              buildTitle(title: AppText.ecommerceTitle),
-              BuildProductCard(
-                products: ecommerce,
+              // buildTitle(),
+
+              FutureBuilder(
+                future: fetchProducts(),
+                builder: (context, snapshot) {
+                  if (snapshot.connectionState == ConnectionState.waiting) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (snapshot.hasError) {
+                    return Center(child: Text('Error: ${snapshot.error}'));
+                  } else if (!snapshot.hasData || snapshot.data!.isEmpty) {
+                    return const Center(child: Text('No products available'));
+                  } else {
+                    // Pass the product data to BuildProductCard
+                    return BuildProductCard(products: snapshot.data!);
+                  }
+                },
               ),
               const SizedBox(
                 height: 15,
               ),
-              buildTitle(title: AppText.groceriesTitle),
-              BuildProductCard(
-                products: groceries,
-              ),
-              const SizedBox(
-                height: 15,
-              ),
-              buildTitle(title: AppText.fruitTitle),
-              BuildProductCard(
-                products: fruits,
-              ),
-              const SizedBox(
-                height: 15,
-              ),
+              // buildTitle(),
+              // BuildProductCard(
+              //     // products: groceries,
+              //     ),
+              // const SizedBox(
+              //   height: 15,
+              // ),
+              // buildTitle(),
+              // BuildProductCard(
+              //     // products: fruits,
+              //     ),
+              // const SizedBox(
+              //   height: 15,
+              // ),
             ],
           ),
         )));
