@@ -1,6 +1,7 @@
 import 'dart:async';
 
 import 'package:flutter/material.dart';
+import 'package:machine_test/core/utils/constants.dart';
 import 'package:machine_test/core/utils/text.dart';
 import 'package:machine_test/data/product_model.dart';
 import 'package:machine_test/domine/repository/repository.dart';
@@ -90,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                 ),
               ),
               // buildTitle(),
-
+              kHeight(20),
               FutureBuilder(
                 future: fetchProducts(),
                 builder: (context, snapshot) {
@@ -106,9 +107,7 @@ class _HomeScreenState extends State<HomeScreen> {
                   }
                 },
               ),
-              const SizedBox(
-                height: 15,
-              ),
+              //  kHeight(90)
               // buildTitle(),
               // BuildProductCard(
               //     // products: groceries,

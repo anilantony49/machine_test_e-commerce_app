@@ -29,7 +29,7 @@ class ProductModel {
       this.description,
       required this.image,
       this.rating,
-      this.quantity,
+      this.quantity=1,
       this.category});
 
   // Factory constructor to create a ProductModel from JSON

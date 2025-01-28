@@ -56,6 +56,18 @@ class BuildProductCard extends StatelessWidget {
                     width: 100,
                     height: 80,
                     fit: BoxFit.contain,
+                    loadingBuilder: (context, child, loadingProgress) {
+                      if (loadingProgress == null) return child;
+                      return const Center(
+                        child: CircularProgressIndicator(),
+                      );
+                    },
+                    errorBuilder: (context, error, stackTrace) {
+                      return const Icon(
+                        Icons.error,
+                        color: Colors.red,
+                      );
+                    },
                   ),
                 ),
                 const Spacer(),
@@ -71,17 +83,6 @@ class BuildProductCard extends StatelessWidget {
                 const SizedBox(
                   height: 2,
                 ),
-                // Row(
-                //   children: [
-                //     Text(
-                //      "${product.price}", // Use product price
-                //       style: TextStyle(
-                //           color: Appcolor.secondaryText,
-                //           fontSize: 14,
-                //           fontWeight: FontWeight.w500),
-                //     ),
-                //   ],
-                // ),
                 const Spacer(),
                 Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

@@ -19,7 +19,10 @@ class CartScreen extends StatelessWidget {
         builder: (BuildContext context, List<ProductModel> newItem, Widget? _) {
           // calculate total amount
           final double totalAmount = newItem.fold(
-              0.0, (sum, item) => sum + ((item.price * item.quantity!)));
+            0.0,
+            (sum, item) => sum + (item.price * (item.quantity ?? 1)),
+          );
+
           return Stack(
             alignment: Alignment.bottomCenter,
             children: [
@@ -31,7 +34,7 @@ class CartScreen extends StatelessWidget {
                     // Get item data
                     final item = newItem[index];
                     return ImageCart(
-                      initialQuantity: 1,
+                      initialQuantity: item.quantity??1,
                       title: item.title,
                       basePrice: item.price,
                       image: item.image,

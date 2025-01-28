@@ -10,7 +10,7 @@ Widget buildTableBody(List<ProductModel> items) {
       ProductModel item = entry.value;
 
       double price = item.price;
-      int quantity = item.quantity!;
+      int quantity = item.quantity??1;
       // double discount = double.tryParse(item.discount) ?? 0.0;
       double totalPrice = (price * quantity);
 

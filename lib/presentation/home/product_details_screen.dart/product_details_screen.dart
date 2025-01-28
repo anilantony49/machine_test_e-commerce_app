@@ -14,7 +14,7 @@ class ProductDetailsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Calculate the total amount for the product
-    double totalAmount = product.price;
+    // double totalAmount = product.price;
     // Define selectedProduct from the product map
     ProductModel selectedProduct = ProductModel(
       id: product.id,
@@ -128,6 +128,13 @@ class ProductDetailsScreen extends StatelessWidget {
                       color: Appcolor.secondaryText,
                     ),
                   ),
+                  //  Text(
+                  //   "Quanty: ${product.quantity}",
+                  //   style: TextStyle(
+                  //     fontSize: 18,
+                  //     color: Appcolor.secondaryText,
+                  //   ),
+                  // ),
                 ],
               ),
               const SizedBox(height: 10),
@@ -212,7 +219,7 @@ class ProductDetailsScreen extends StatelessWidget {
                       nextScreen(
                         context,
                         CheckOutScreen(
-                          totalAmount: totalAmount,
+                          totalAmount: product.price,
                           product: selectedProduct,
                         ),
                       );
