@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:machine_test/core/utils/alerts_and_navigators.dart';
 import 'package:machine_test/core/utils/colors.dart';
 import 'package:machine_test/core/utils/constants.dart';
 import 'package:machine_test/core/utils/text.dart';
 import 'package:machine_test/data/product_model.dart';
 import 'package:machine_test/db/cart_db.dart';
-import 'package:machine_test/presentation/cart/check_out_screen/check_out_screen.dart';
+import 'package:machine_test/presentation/screens/cart/check_out_screen/check_out_screen.dart';
 
 class ProductDetailsScreen extends StatelessWidget {
   final ProductModel product;
@@ -130,7 +131,7 @@ class ProductDetailsScreen extends StatelessWidget {
                   ),
                 ],
               ),
-              const SizedBox(height: 10),
+              kHeight(10),
 
               // Product Description
               Text(
@@ -141,8 +142,7 @@ class ProductDetailsScreen extends StatelessWidget {
                   color: Appcolor.secondaryText,
                 ),
               ),
-              const SizedBox(height: 20),
-
+              kHeight(20),
               // Action Buttons
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceAround,
@@ -163,11 +163,7 @@ class ProductDetailsScreen extends StatelessWidget {
                             await CartDb.singleton.removeCart(cartItem.id);
 
                             // ignore: use_build_context_synchronously
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                  content: Text(AppText.itemRemovedText),
-                                  duration: const Duration(seconds: 2)),
-                            );
+                            customSnackbar(context, AppText.itemRemovedText);
                           } else {
                             // Add item to cart
                             final newItem = ProductModel(
@@ -181,11 +177,7 @@ class ProductDetailsScreen extends StatelessWidget {
                             await CartDb.singleton.addCart(newItem);
 
                             // ignore: use_build_context_synchronously
-                            ScaffoldMessenger.of(context).showSnackBar(
-                              SnackBar(
-                                  content: Text(AppText.itemAddedText),
-                                  duration: const Duration(seconds: 2)),
-                            );
+                            customSnackbar(context, AppText.itemAddedText);
                           }
                         },
                         minWidth: 100,

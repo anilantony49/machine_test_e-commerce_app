@@ -12,10 +12,8 @@ class ProductModel {
   final double price;
   @HiveField(3)
   final String? description;
-
   @HiveField(4)
   final String image;
-
   @HiveField(5)
   final int? quantity;
   @HiveField(6)

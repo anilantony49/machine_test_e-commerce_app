@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
+import 'package:machine_test/core/utils/constants.dart';
 import 'package:machine_test/data/product_model.dart';
 import 'package:machine_test/db/cart_db.dart';
-import 'package:machine_test/presentation/cart/check_out_screen/widgets/build_table_body.dart';
-import 'package:machine_test/presentation/cart/check_out_screen/widgets/build_table_header.dart';
-import 'package:machine_test/presentation/cart/invoice_receipt/widgets/build_animated_image.dart';
-import 'package:machine_test/presentation/cart/invoice_receipt/widgets/build_animated_text.dart';
-import 'package:machine_test/presentation/cart/invoice_receipt/widgets/build_invoice_pdf.dart';
-import 'package:machine_test/presentation/cart/invoice_receipt/widgets/invoice_receipt_components.dart';
+import 'package:machine_test/presentation/screens/cart/check_out_screen/widgets/build_table_body.dart';
+import 'package:machine_test/presentation/screens/cart/check_out_screen/widgets/build_table_header.dart';
+import 'package:machine_test/presentation/screens/cart/invoice_receipt/widgets/build_animated_image.dart';
+import 'package:machine_test/presentation/screens/cart/invoice_receipt/widgets/build_animated_text.dart';
+import 'package:machine_test/presentation/screens/cart/invoice_receipt/widgets/build_invoice_pdf.dart';
+import 'package:machine_test/presentation/screens/cart/invoice_receipt/widgets/invoice_receipt_components.dart';
 
 class InvoiceReceiptView extends StatefulWidget {
   final double grandTotal;
@@ -68,22 +69,22 @@ class _InvoiceReceiptViewState extends State<InvoiceReceiptView>
             child: Column(
               children: [
                 buildAnimatedImage(scaleAnimation),
-                const SizedBox(height: 20),
+                 kHeight(20),
                 buildAnimatedText(),
-                const SizedBox(height: 20),
+                  kHeight(20),
                 const DetailsBox(
                   label1: 'Order Number',
                   value1: 'CTR362',
                   label2: 'Bill Number',
                   value2: 'S178',
                 ),
-                const SizedBox(height: 10),
+               kHeight(10),
                 SummaryBox(
                   title: 'Payment Summary',
                   label: 'Cash',
                   value: "\$${widget.grandTotal.toStringAsFixed(2)}",
                 ),
-                const SizedBox(height: 10),
+                kHeight(10),
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
@@ -96,21 +97,21 @@ class _InvoiceReceiptViewState extends State<InvoiceReceiptView>
                     buildTableBody(items),
                   ],
                 ),
-                const SizedBox(height: 20),
+                 kHeight(20),
                 DetailsBox(
                   label1: 'Total amount paid',
                   value1: "\$${widget.grandTotal.toStringAsFixed(2)}",
                   label2: 'Remaining amount to be paid',
                   value2: '\$0',
                 ),
-                const SizedBox(height: 10),
+                kHeight(10),
                 const CustomerInfoBox(),
-                const SizedBox(height: 20),
+                kHeight(20),
                 BuildInvoicePdf(
                   grandTotal: widget.grandTotal,
                   items: items,
                 ),
-                const SizedBox(height: 20),
+                kHeight(20),
                 ActionButton(
                   label: 'New sale',
                   onPressed: () {

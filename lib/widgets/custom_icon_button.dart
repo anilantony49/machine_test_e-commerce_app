@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:machine_test/core/utils/colors.dart';
+import 'package:machine_test/core/utils/constants.dart';
 
 class CustomIconButton extends StatelessWidget {
   final int index;
@@ -35,7 +36,7 @@ class CustomIconButton extends StatelessWidget {
                 width: 25,
                 color: isSelected ? Appcolor.primary : Appcolor.primaryText,
               ),
-              const SizedBox(height: 4),
+              kHeight(4),
               Text(
                 label,
                 style: TextStyle(

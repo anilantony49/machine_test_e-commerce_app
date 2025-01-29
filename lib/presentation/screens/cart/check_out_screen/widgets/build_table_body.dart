@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:machine_test/data/product_model.dart';
-import 'package:machine_test/presentation/cart/cart_screen/widgets/build_table_cell.dart';
+import 'package:machine_test/presentation/screens/cart/cart_screen/widgets/build_table_cell.dart';
 
 Widget buildTableBody(List<ProductModel> items) {
   return Table(

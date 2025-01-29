@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:machine_test/core/utils/constants.dart';
 import 'package:machine_test/core/utils/text.dart';
 
 class DetailsBox extends StatelessWidget {
@@ -21,7 +22,7 @@ class DetailsBox extends StatelessWidget {
       Column(
         children: [
           _buildKeyValueRow(label1, value1),
-          const SizedBox(height: 20),
+          kHeight(20),
           _buildKeyValueRow(label2, value2),
         ],
       ),
@@ -53,7 +54,7 @@ class SummaryBox extends StatelessWidget {
             title,
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 10),
+            kHeight(10),
           _buildKeyValueRow(label, value),
         ],
       ),
@@ -76,7 +77,7 @@ class CustomerInfoBox extends StatelessWidget {
             AppText.customerInfo,
             style: const TextStyle(fontSize: 18, fontWeight: FontWeight.bold),
           ),
-          const SizedBox(height: 20),
+          kHeight(20),
           Row(
             children: [
               Text(
@@ -97,7 +98,7 @@ class CustomerInfoBox extends StatelessWidget {
               ),
             ],
           ),
-          const SizedBox(height: 10),
+          kHeight(10),
           Text(
             AppText.customerAddress,
             style: const TextStyle(fontSize: 14, fontWeight: FontWeight.bold),

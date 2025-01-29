@@ -21,9 +21,9 @@ class ProductSucessState extends ProductState {
   ProductSucessState(this.products);
 }
 
-class CartUpdatedState extends ProductState {
-  final List<ProductModel> cartItems;
-  CartUpdatedState(this.cartItems);
-}
+// class CartUpdatedState extends ProductState {
+//   final List<ProductModel> cartItems;
+//   CartUpdatedState(this.cartItems);
+// }
 
 // class ProductSucessState extends ProductState {}

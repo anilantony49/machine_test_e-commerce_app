@@ -1,16 +1,15 @@
-
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:machine_test/core/utils/colors.dart';
+import 'package:machine_test/core/utils/constants.dart';
 import 'package:machine_test/data/product_model.dart';
-import 'package:machine_test/db/cart_db.dart';
+import 'package:machine_test/presentation/bloc/cart_bloc/cart_bloc.dart';
 
-class ImageCart extends StatefulWidget {
+class ImageCart extends StatelessWidget {
   final int id;
   final String title;
   final double basePrice;
   final int initialQuantity;
-  // final String discount;
-  // final String unit;
   final String image;
   final VoidCallback onRemove;
 
@@ -20,65 +19,32 @@ class ImageCart extends StatefulWidget {
     required this.title,
     required this.basePrice,
     required this.initialQuantity,
-    // required this.discount,
-    // required this.unit,
     required this.image,
     required this.onRemove,
   });
 
-  @override
-  State<ImageCart> createState() => _ImageCartState();
-}
-
-class _ImageCartState extends State<ImageCart> {
-  late int quantity;
-  late double totalPrice;
-
-  @override
-  void initState() {
-    super.initState();
-    quantity =
-        widget.initialQuantity; // Initialize quantity with the passed value
-    totalPrice = widget.basePrice * quantity; // Calculate initial total price
+  void _incrementQuantity(BuildContext context) {
+    final updatedItem = ProductModel(
+      id: id,
+      title: title,
+      price: basePrice,
+      quantity: initialQuantity + 1,
+      image: image,
+    );
+    context.read<CartBloc>().add(CartEdit(updatedItem));
   }
 
-  void incrementQuantity() async {
-    setState(() {
-      quantity++;
-      totalPrice = widget.basePrice * quantity; // Update total price
-    });
-    final updatedItem = ProductModel(
-      // description: '',
-      id: widget.id,
-      title: widget.title,
-      price: double.parse(widget.basePrice.toStringAsFixed(2)),
-      quantity: quantity,
-      // unit: widget.unit,
-      image: widget.image,
-      // discount: widget.discount
-    );
-
-    await CartDb.singleton.editCart(updatedItem, widget.id);
-  }
-
-  void decrementQuantity() async {
-    setState(() {
-      if (quantity > 1) {
-        quantity--;
-        totalPrice = widget.basePrice * quantity; // Update total price
-      }
-    });
-    final updatedItem = ProductModel(
-      id: widget.id,
-      title: widget.title,
-      price: double.parse(widget.basePrice.toStringAsFixed(2)),
-      quantity: quantity,
-      // unit: widget.unit,
-      image: widget.image,
-      // discount: widget.discount
-    );
-
-    await CartDb.singleton.editCart(updatedItem, widget.id);
+  void _decrementQuantity(BuildContext context) {
+    if (initialQuantity > 1) {
+      final updatedItem = ProductModel(
+        id: id,
+        title: title,
+        price: basePrice,
+        quantity: initialQuantity - 1,
+        image: image,
+      );
+      context.read<CartBloc>().add(CartEdit(updatedItem));
+    }
   }
 
   @override
@@ -95,7 +61,6 @@ class _ImageCartState extends State<ImageCart> {
               borderRadius: BorderRadius.circular(15),
               boxShadow: [
                 BoxShadow(
-                  // ignore: deprecated_member_use
                   color: Colors.black.withOpacity(0.6),
                   offset: const Offset(0.0, 10.0),
                   blurRadius: 10.0,
@@ -104,16 +69,15 @@ class _ImageCartState extends State<ImageCart> {
               ],
               image: DecorationImage(
                 colorFilter: ColorFilter.mode(
-                  // ignore: deprecated_member_use
                   Colors.black.withOpacity(0.35),
                   BlendMode.multiply,
                 ),
-                image: NetworkImage(widget.image),
+                image: NetworkImage(image),
                 fit: BoxFit.cover,
               ),
             ),
           ),
-          const SizedBox(width: 15),
+          kWidth(15),
           Expanded(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
@@ -122,7 +86,7 @@ class _ImageCartState extends State<ImageCart> {
                   children: [
                     Expanded(
                       child: Text(
-                        widget.title,
+                        title,
                         style: TextStyle(
                           color: Appcolor.primaryText,
                           fontSize: 16,
@@ -131,7 +95,7 @@ class _ImageCartState extends State<ImageCart> {
                       ),
                     ),
                     InkWell(
-                      onTap: widget.onRemove,
+                      onTap: onRemove,
                       child: Image.asset(
                         "assets/img/close.png",
                         width: 15,
@@ -141,18 +105,17 @@ class _ImageCartState extends State<ImageCart> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20),
+                kHeight(20),
                 Row(
                   children: [
                     InkWell(
-                      onTap: decrementQuantity,
+                      onTap: () => _decrementQuantity(context),
                       child: Container(
                         width: 40,
                         height: 40,
                         decoration: BoxDecoration(
                           color: Colors.white,
                           border: Border.all(
-                            // ignore: deprecated_member_use
                             color: Appcolor.placeholder.withOpacity(0.5),
                             width: 1,
                           ),
@@ -166,44 +129,40 @@ class _ImageCartState extends State<ImageCart> {
                         ),
                       ),
                     ),
-                    const SizedBox(width: 15),
-                    Row(
-                      children: [
-                        Text(
-                          "$quantity Qty",
-                          style: TextStyle(
-                            color: Appcolor.primaryText,
-                            fontSize: 14,
-                            fontWeight: FontWeight.w600,
-                          ),
-                        ),
-                       
-                      ],
+                    kWidth(15),
+                    Text(
+                      "$initialQuantity Qty",
+                      style: TextStyle(
+                        color: Appcolor.primaryText,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w600,
+                      ),
                     ),
-                    const SizedBox(width: 15),
+                    kWidth(15),
                     InkWell(
-                      onTap: incrementQuantity,
+                      onTap: () => _incrementQuantity(context),
                       child: Container(
-                          width: 40,
-                          height: 40,
-                          decoration: BoxDecoration(
-                            color: Colors.white,
-                            border: Border.all(
-                              color: Appcolor.placeholder.withOpacity(0.5),
-                              width: 1,
-                            ),
-                            borderRadius: BorderRadius.circular(15),
+                        width: 40,
+                        height: 40,
+                        decoration: BoxDecoration(
+                          color: Colors.white,
+                          border: Border.all(
+                            color: Appcolor.placeholder.withOpacity(0.5),
+                            width: 1,
                           ),
-                          alignment: Alignment.center,
-                          child: const Icon(
-                            Icons.add,
-                            size: 20,
-                            color: Colors.green,
-                          )),
+                          borderRadius: BorderRadius.circular(15),
+                        ),
+                        alignment: Alignment.center,
+                        child: const Icon(
+                          Icons.add,
+                          size: 20,
+                          color: Colors.green,
+                        ),
+                      ),
                     ),
                     const Spacer(),
                     Text(
-                      "\$${totalPrice.toStringAsFixed(2)}",
+                      "\$${(basePrice * initialQuantity).toStringAsFixed(2)}",
                       style: TextStyle(
                         color: Appcolor.primaryText,
                         fontSize: 16,

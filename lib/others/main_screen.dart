@@ -1,8 +1,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:machine_test/others/bottom_navigation.dart';
-import 'package:machine_test/presentation/cart/cart_screen/cart_screen.dart';
-import 'package:machine_test/presentation/home/home_screen/home_screen.dart';
+import 'package:machine_test/presentation/screens/cart/cart_screen/cart_screen.dart';
+import 'package:machine_test/presentation/screens/home/home_screen/home_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});

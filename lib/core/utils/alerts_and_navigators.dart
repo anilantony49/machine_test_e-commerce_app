@@ -1,4 +1,3 @@
-
 import 'package:flutter/material.dart';
 import 'package:machine_test/core/utils/colors.dart';
 import 'package:machine_test/core/utils/constants.dart';
@@ -8,12 +7,7 @@ import 'package:machine_test/db/cart_db.dart';
 class CartActions {
   static void removeItemsAndShowSnackbar(BuildContext context, int itemId) {
     CartDb.singleton.removeCart(itemId);
-    ScaffoldMessenger.of(context).showSnackBar(
-      SnackBar(
-        content: Text(AppText.itemRemovedText),
-        duration: const Duration(seconds: 2),
-      ),
-    );
+customSnackbar(context, AppText.itemRemovedText);
   }
 }
 
@@ -61,6 +55,7 @@ customSnackbar(BuildContext context, String message,
     ),
   );
 }
+
 class CustomAlertDialog extends StatelessWidget {
   final String? title;
   final bool disableTitle;
@@ -112,14 +107,13 @@ class CustomAlertDialog extends StatelessWidget {
               description ?? '',
               textAlign: TextAlign.center,
               style: TextStyle(
-                  fontSize: descriptionTxtSize ?? 13,
-                  color: Colors.white),
+                  fontSize: descriptionTxtSize ?? 13, color: Colors.white),
             ),
           ),
           kHeight(10),
           Divider(
             height: 1,
-            color:  Colors.white,
+            color: Colors.white,
           ),
           disableActionBtn == false
               ? SizedBox(
@@ -132,7 +126,7 @@ class CustomAlertDialog extends StatelessWidget {
                         actionBtnTxt ?? 'Delete',
                         style: TextStyle(
                           fontSize: 16.0,
-                          color:  Colors.white,
+                          color: Colors.white,
                           fontWeight: FontWeight.w600,
                         ),
                       ),

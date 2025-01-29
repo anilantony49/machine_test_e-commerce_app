@@ -3,10 +3,10 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:machine_test/data/product_model.dart';
 import 'package:machine_test/others/main_screen.dart';
-import 'package:machine_test/presentation/bloc/bloc/cart_bloc.dart';
+import 'package:machine_test/presentation/bloc/cart_bloc/cart_bloc.dart';
 // import 'package:machine_test/presentation/bloc/cart_bloc/cart_bloc.dart';
 import 'package:machine_test/presentation/bloc/product_bloc/product_bloc.dart';
-import 'package:machine_test/presentation/cart/cart_screen/cart_screen.dart';
+import 'package:machine_test/presentation/screens/cart/cart_screen/cart_screen.dart';
 
 Future<void> main() async {
   await Hive.initFlutter();
@@ -26,10 +26,10 @@ class MyApp extends StatelessWidget {
         BlocProvider<ProductBloc>(
           create: (BuildContext context) => ProductBloc(),
         ),
-        // BlocProvider(
-        //   create: (context) => CartBloc()..add(CartLoad()),
-        //   child: CartScreen(),
-        // ),
+        BlocProvider(
+          create: (context) => CartBloc()..add(CartLoad()),
+          child: CartScreen(),
+        ),
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
